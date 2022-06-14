@@ -4,65 +4,94 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>diaomao</title>
+    <script src="jquery.js"></script>
     <style type="text/css">
         * {
             margin: 0;
             padding: 0;
         }
 
-        .item {
-            width: 500px;
-            margin: 100px auto;
+        html,
+        body {
+            width: 100%;
+            height: 100%;
         }
 
-        input {
-            /* float: left; */
-            width: 380px;
-            height: 40px;
-            outline: none;
-            box-sizing: border-box;
-            padding: 0 10px;
+        span {
+            width: 10px;
+            height: 10px;
+            background-color: #000;
+            position: absolute;
+            display: inline-block;
+            animation: name 1s alternate infinite;
+            border-radius: 10px;
         }
 
-        input[type=button] {
-            width: 100px;
-            margin-left: 10px;
+        p {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 150px;
+            color: red;
+            z-index: 999;
         }
-    </style>
-</head>
 
-<body>
-    <div class="item">
-        <input type="text" name="" id="">
-        <input type="button" value="ok">
-        <br>
-    </div>
-    <script type="text/javascript">
-        $('input[type=button]').click(play);
-        setData()
-        function play() {
-            var input = $('input[type=text]');
-            if (input.val() !== '') {
-                var api = 'https://jx.parwix.com:4433/player/?url='
-                window.open(api + input.val())
-                localStorage.setItem('data', api + $('input[type=text]').val())
-                setData()
-                window.location.reload()
+        @keyframes name {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
             }
         }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var { width, height } = getScreen();
+            for (var i = 0; i < 2000; i++) {
+                var p = document.createElement('span');
+                document.body.appendChild(p)
 
-        function getData() {
-            return localStorage.getItem('data')
-        }
-        function setData() {
-            var a = $('<a target="_blank" href="' + getData() + '">' + getData() + '</a>');
-            if (getData()) {
-                $('.item').append(a)
+                var x = Math.random() * (width - 20);
+                var y = Math.random() * (height - 20);
+
+                p.style.left = x + 'px'
+                p.style.top = y + 'px'
+
+                var scale = Math.random() * 2;
+                p.style.transform = 'scale(' + scale + ')';
+
+                var time = Math.random() * 5;
+                p.style.animationDelay = time + 's';
+            }
+
+            function getScreen() {
+                let width, height;
+                if (window.innerWidth) {
+                    width = window.innerWidth;
+                    height = window.innerHeight;
+                } else if (document.compatMode === "BackCompat") {
+                    width = document.body.clientWidth;
+                    height = document.body.clientHeight;
+                } else {
+                    width = document.documentElement.clientWidth;
+                    height = document.documentElement.clientHeight;
+                }
+                return {
+                    width: width,
+                    height: height
+                }
             }
         }
     </script>
+</head>
+
+<body>
+    <p>叼毛</p>
 </body>
 
 </html>
