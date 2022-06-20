@@ -1,0 +1,2 @@
+console.log("test")
+document.querySelector('.player__container').innerHTML = '<iframe scrolling="no" allowtransparency="true" frameborder="0" width="100%" height="100%" frameborder="no" allowFullscreen="true" src="https://jx.parwix.com:4433/player/?url=' + window.location.href + '"></iframe>'
